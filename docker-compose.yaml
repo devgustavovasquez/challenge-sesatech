@@ -1,13 +1,12 @@
 version: '3.7'
 
 services:
-  oracle-db:
-    container_name: oracle-db
-    image: gvenzl/oracle-xe
+  database:
+    container_name: postgres
+    image: postgres
     ports:
-      - 1521:1521
+      - '5432:5432'
     environment:
-      ORACLE_PASSWORD: 123456a
-      ORACLE_DATABASE: lucid
-      APP_USER: lucid
-      APP_USER_PASSWORD: lucid
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: local
+      POSTGRES_DB: lucid
