@@ -74,6 +74,8 @@ export default class AuthMiddleware {
         return response.status(403).send({ error: 'Unauthorized access' })
       }
 
+      console.log(error)
+
       return response.status(500).send({ error: 'Something went wrong' })
     }
   }
