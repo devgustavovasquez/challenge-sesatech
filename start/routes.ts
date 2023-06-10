@@ -20,4 +20,27 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('/users', 'UsersController')
+Route.post('/users', 'UsersController.store')
+
+Route.post('/login', async ({ auth, request, response }) => {
+  const email = request.input('email')
+  const password = request.input('password')
+
+  try {
+    const token = await auth.use('api').attempt(email, password)
+    return token
+  } catch (error) {
+    if (error.guard) {
+      return response.status(401).send({ error: 'Invalid email/password' })
+    }
+
+    return response.status(500).send({ error: 'Something went wrong' })
+  }
+})
+
+Route.group(() => {
+  Route.get('/users', 'UsersController.index')
+  Route.get('/users/:id', 'UsersController.show')
+  Route.put('/users/:id', 'UsersController.update')
+  Route.delete('/users/:id', 'UsersController.destroy')
+}).middleware('auth')
