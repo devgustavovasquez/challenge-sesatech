@@ -21,7 +21,7 @@ WORKDIR /app
 
 # Copy from current directory to WORKDIR
 COPY --from=build /app/build ./
-COPY --from=build /app/.env ./
+COPY --from=build /app/.env.example ./
 
 # Install dependencies
 RUN npm ci --production
