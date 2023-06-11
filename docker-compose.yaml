@@ -2,11 +2,26 @@ version: '3.7'
 
 services:
   database:
-    container_name: postgres
+    container_name: database
     image: postgres
     ports:
-      - '5432:5432'
+      - 5432:5432
     environment:
       POSTGRES_USER: local
       POSTGRES_PASSWORD: local
       POSTGRES_DB: lucid
+
+  app:
+    container_name: api
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    command:
+      - sh
+      - -c
+      - |
+        node ace migration:run
+        node ace db:seed
+        node server.js
