@@ -25,7 +25,7 @@ Inicialize usando o docker-compose
 #### ATENÇÃO: Reinicie apenas a aplicação para rodar as migrations e seeders.
 
 
-Use as rotas no Postman para testar a aplicação no endereço abaixo
+Use as rotas no Postman para testar a aplicação no endereço abaixo (o Postman Collection está na raiz do projeto)
 
 ```bash
   http://localhost:8080
